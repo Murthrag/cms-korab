@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Dokumenty</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	
+    <script>
+        // prihlaseneho uzivatela musi nacitat az neskor
+        $(function(){
+            $("#includeHeader").load("all/header.php");
+            $("#includeFooter").load("all/footer.html");                
+        });
+    </script>
+</head>
+<body onresize="resizeEvent()">
+    <div id="mainPage" style="text-align:center;">
+        <div id="includeHeader"></div>
+        <div class="container pageLike">
+            
+				<div class="row" >	
+                    <div class="coll-sm-12 col-md-11">
+                        <div  class="dokumentImgDiv">
+                            <img  class="img-circle imgDokumenty" src="./images/dokumenty.jpg">
+                        </div>
+                    </div>
+				</div>
+            
+			<div class ="row" style="text-align:left; padding-left:12px;">
+                <div class="col-xs-0 col-sm-0 col-md-1 col-lg-1"></div>
+				<div class="col-xs-12 col-sm-11 col-md-10 col-lg-9">
+                    <h2 class="font_4">
+                        <span class="color_15">Dokumenty na stiahnutie</span>
+                    </h2>
+
+                    <p class="font_8">
+                        <span class="color_18">Kiknutím na ikonku dokumentu, alebo na názov dokumentu spustíte sťahovanie.
+                        </span>
+                    </p>
+                    <br>
+                    <ul>
+                    <li>
+					<a href="/Download/ziadost_o_prijatie_dietata.doc" download="Žiadosť o prijatie dieťaťa.doc" style="color: #337ab7 !IMPORTANT">					
+						<img src="./all/document_icon.png"  height="50" width="50">
+						Žiadosť o prijatie dieťaťa
+						
+                    </a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="includeFooter"></div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+	$(window).on('load', function() {
+		resizeEvent();
+	});
+</script>

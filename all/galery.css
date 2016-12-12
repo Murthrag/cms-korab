@@ -1,0 +1,139 @@
+ @media (min-width: 1200px){
+              .galery_style{
+                  padding:50px 0 0 200px;
+                  max-width: 1085px;
+              }
+              .fotopanel {
+				/*margin-top: 188px;*/
+				float: left;
+				margin-left: calc(50% - 580px);
+				position: fixed;
+			  }   
+			  #sidebar_from_w3{
+				  display: none;
+			  }    
+
+          }
+          @media (min-width: 992px) and (max-width: 1200px){ 
+              .galery_style{
+                  padding: 50px 0 0 200px;
+                  max-width: 900px;
+              }   
+              .fotopanel {
+				/*margin-top: 188px;*/
+				float: left;
+				margin-left: calc(50% - 480px);
+				position: fixed;				  
+			  }
+			  #sidebar_from_w3{
+				  display: none;
+			  }                                    
+          }
+          @media (min-width: 768px) and (max-width: 992px) {
+              .galery_style{
+                  padding: 50px 0 0 200px;
+                  max-width: 900px;
+              }             
+			  .fotopanel {
+				/*margin-top: 188px;*/
+				float: left;
+				margin-left: calc(50% - 370px);
+				position: fixed;
+			  } 
+			  #sidebar_from_w3{
+				  display: none;
+			  }             
+          }
+          
+          @media (max-width: 768px) and (max-width: 384px){ 
+              .galery_style{
+                  padding: 0 0 0 15px;
+              }   
+              #galery_picker{
+				  padding-top: 50px;
+			  }
+              .fotopanel {
+				  display: none;          
+			  }   
+			  #sidebar_from_w3{       
+				top: 150px;
+				position: fixed;
+				left: 15px;
+				z-index: 10;
+                background-color: #f8f8f8;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 5px;
+			  }
+			  #leftMenu{
+				  background-color: #f8f8f8 !IMPORTANT;
+				  z-index: 10;
+				  margin-right:5px;
+                  top: 200px !important;
+			  }
+			  #includeFooter{
+				margin-top: 350px;
+			  }
+          }
+          
+          @media (max-width: 384px){ 
+			  .galery_style{
+                  padding: 0 0 0 15px;
+              }   
+              #galery_picker{
+				  padding-top: 100px;
+			  }
+              .fotopanel {
+				  display: none;          
+			  }   
+			  #sidebar_from_w3{       
+				top: 200px;
+				position: fixed;
+				left: 15px;
+				z-index: 10;
+                background-color: #f8f8f8;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 5px;
+			  }
+			  #leftMenu{
+				  background-color: #f8f8f8 !IMPORTANT;
+				  z-index: 10;
+				  margin-right:5px;
+				  top: 200px !important;
+			  }
+			  #includeFooter{
+				margin-top: 1200px;
+			  }
+		  }          
+          ul {
+              padding:0 0 0 0;
+              
+          }
+          .galery_style li {
+              margin-bottom:10px;
+          }
+          li {
+              list-style:none;
+          }
+
+
+          
+          #nm1{
+
+            float: right;
+            margin-top: 8px;
+          }
+          .minus{
+              float: right;
+              margin-top: 10px;
+
+          }
+          .hide_image{
+              display: none !IMPORTANT;
+          }
+          .disable{
+              pointer-events: none;
+              cursor: default;
+          }
+

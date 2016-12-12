@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kontakt</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="kontakt/theme.css"  type="text/css"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $("#includeHeader").load("all/header.php");
+        $("#includeFooter").load("all/footer.html");
+
+        // prihlaseneho uzivatela musi nacitat az neskor
+        $(function(){
+            $("#includeHeader").load("all/header.php");
+            $("#includeFooter").load("all/footer.html");                
+        });
+    </script>
+</head>
+<body>
+<div id="includeHeader"></div>
+<div class="container pageLike" style="padding-left: 0px; height:100vh; margin-top: 200px;">
+						
+	<div class="row" >	
+		<div class="col-xs-12" style="text-align:center;">
+			<h2 class="font_4">
+				<span class="color_15">Kontakt</span>
+			</h2>
+			<br><br>		
+		</div>
+		<div class="col-xs-11 col-sm-11 col-md-6 col-lg-6">
+			<div class="text">
+				<p style="font-weight: bold;">Adresa: </p>
+				<p>Cirkevná materská škola</p>
+				<p>Hviezdoslavova 178/5</p>
+				<p>033 01, Liptovský Hrádok</p>
+
+			<div class="clear"> </div>
+
+				<p style="font-weight: bold;">Kontakt: </p>
+				<p>Vedenie:	+421 918 828 184</p><br>
+				<p><b>Zborová farárka:</b></p>
+				<p>Mgr. Anna Belanji, +421 918 828 050</p><br>
+				<p><b>Zborový dozorca:</b></p> 
+				<p>Ing. Ján Pavlík PhD., +421 903 175 627</p>
+				
+			<div class="clear"> </div>
+
+				<p style="font-weight: bold;">Email: </p>
+				<p><a href="mailto:cmskorab@gmail.com">cmskorab@gmail.com</a></p>
+				<p><a href="mailto:riaditelka@cms-korab.sk">riaditelka@cms-korab.sk</a></p>
+				<p><a href="mailto:lipt.hradok@ecav.sk">lipt.hradok@ecav.sk</a></p>
+					
+			<div class="clear"> </div>
+
+				<p style="font-weight: bold;">Bankové spojenie: </p>
+				<p>Číslo účtu: SK2156000000001605608021/5600</p>
+				<p>IČO: 31933041</p>
+				<p>DIČ: 2021391328</p>
+				
+			<div class="clear"> </div>
+
+				<p style="font-weight: bold;">Zriaďovateľ: </p>
+				<p>Cirkevný zbor ECAV na Slovensku</p>
+				<p>Hviezdoslavova 142</p>
+				<p>033 01, Liptovský Hrádok</p>
+				<p><b>Web:</b> <a href="http://zbory.ecav.sk/hradok">www.zbory.ecav.sk/hradok</a>
+				<br><br><br><br>
+			</div>
+		</div>
+		
+		<div class="col-xs-11 col-sm-11 col-md-5 col-lg-5">
+			<p class="font_8">
+				<span class="color_18">Napíšte nám</span>
+			</p>	
+			<form action="kontakt/submit.php" method="post"  enctype="multipart/form-data">
+			  <div class="form-group">
+				  <input type="text" name="name" placeholder="Meno a Priezvisko" class="form-control">
+			  </div>
+			  <div class="form-group">
+				  <input type="text" name="email" placeholder="Email" class="form-control">
+			  </div>
+			  <div class="form-group">
+				  <input type="text" name="phone" placeholder="Váše telefonné číslo" class="form-control">
+			  </div>
+			  <div class="form-group">
+				  <input type="text" name="subject" placeholder="Predmet" class="form-control">
+			  </div>
+			  <div class="form-group">
+				<textarea name="message" placeholder="Správa pre nás" class="form-control"></textarea>
+			  </div>
+			  <div class="form-group">
+				  <input name="captcha" type="text" placeholder="Prepíšte nižšie uvedený kód" class="form-control">
+				  <img src="kontakt/captcha.php" /><br> 
+			  </div>
+			  <input type="Submit" value="Odoslať" class="btn btn-default">
+			  
+			</form>
+		</div>
+	</div>
+
+</div>
+
+<div id="includeFooter"></div>	
+</body>
+</html>
+<script>
+	$(window).on('load', function() {
+		resizeEvent();
+	});
+</script>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Fotoalbum</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/all/all.css" rel="stylesheet">
+   
+
+	<link href="scripts/jquery.bsPhotoGallery.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+
+    <script>
+        $("#includeHeader").load("all/header.php");
+        $("#includeFooter").load("all/footer.html"); 
+
+        // prihlaseneho uzivatela musi nacitat az neskor
+        $(function(){
+            $("#includeHeader").load("all/header.php");
+            $("#includeFooter").load("all/footer.html");    
+        });
+    </script>
+</head>
+      <style>
+          @media (min-width: 1200px){
+              .galery_style{
+                  padding:50px 0 0 200px;
+                  max-width: 1085px;
+              }
+              .fotopanel {
+				/*margin-top: 188px;*/
+				float: left;
+				margin-left: calc(50% - 580px);
+				position: fixed;
+			  }   
+			  #sidebar_from_w3{
+				  display: none;
+			  } 
+              .navigation{
+                  top: 850px;
+                  left: 55%;
+                  position: absolute;
+              }              
+              #includeFooter {
+                  top: 950px;
+                  position: absolute;
+                  width: 100%;
+              }
+          }
+          @media (min-width: 992px) and (max-width: 1200px){ 
+              .galery_style{
+                  padding: 50px 0 0 200px;
+                  max-width: 900px;
+              }   
+              .fotopanel {
+				/*margin-top: 188px;*/
+				float: left;
+				margin-left: calc(50% - 480px);
+				position: fixed;				  
+			  }
+			  #sidebar_from_w3{
+				  display: none;
+			  }  
+              .navigation{
+                  top: 1050px;
+                  left: 55%;
+                  position: absolute;
+              }              
+              #includeFooter {
+                  top: 1150px;
+                  position: absolute;
+                  width: 100%;
+              }              
+           
+          }
+          @media (min-width: 768px) and (max-width: 992px) {
+              .galery_style{
+                  padding: 50px 0 0 200px;
+                  max-width: 900px;
+              }             
+			  .fotopanel {
+				/*margin-top: 188px;*/
+				float: left;
+				margin-left: calc(50% - 370px);
+				position: fixed;
+			  } 
+			  #sidebar_from_w3{
+				  display: none;
+			  }  
+              .navigation{
+                  top: 950px;
+                  left: 55%;
+                  position: absolute;
+              }              
+              #includeFooter {
+                  top: 1050px;
+                  position: absolute;
+                  width: 100%;
+              }                 
+          
+          }
+          
+          @media (min-width: 384px) and (max-width: 768px){ 
+              .galery_style{
+                  padding: 0 0 0 15px;
+              }   
+              #galery_picker{
+				  padding-top: 50px;
+			  }
+              .fotopanel {
+				  display: none;          
+			  }   
+			  #sidebar_from_w3{       
+				top: 180px;
+				position: fixed;
+				left: 15px;
+				z-index: 10;
+                background-color: #f8f8f8;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 5px;
+			  }
+			  #leftMenu{
+				  background-color: #f8f8f8 !IMPORTANT;
+				  z-index: 10;
+				  margin-right:5px;
+                  top: 180px !important;
+			  }
+              .navigation{
+                  top: 1250px;
+                  left: 46%;
+                  position: absolute;
+              }              
+              #includeFooter {
+                  top: 1350px;
+                  position: absolute;
+                  width: 100%;
+              }                 
+          
+
+          }
+          
+          @media (max-width: 384px){ 
+			  .galery_style{
+                  padding: 0 0 0 15px;
+              }   
+              #galery_picker{
+				  padding-top: 100px;
+			  }
+              .fotopanel {
+				  display: none;          
+			  }   
+			  #sidebar_from_w3{       
+				top: 200px;
+				position: fixed;
+				left: 15px;
+				z-index: 10;
+                background-color: #f8f8f8;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 5px;
+			  }
+			  #leftMenu{
+				  background-color: #f8f8f8 !IMPORTANT;
+				  z-index: 10;
+				  margin-right:5px;
+				  top: 200px !important;
+			  }
+              .navigation{
+                  margin-top: 1210px;
+              }  
+
+		  }  
+
+          ul {
+              padding:0 0 0 0;
+              
+          }
+          .galery_style li {
+              margin-bottom:10px;
+          }
+          li {
+              list-style:none;
+          }
+          
+          #nm1{
+
+            float: right;
+            margin-top: 8px;
+          }
+          .minus{
+              float: right;
+              margin-top: 10px;
+
+          }
+          .hide_image{
+              display: none !IMPORTANT;
+          }
+          .disable{
+              pointer-events: none;
+              cursor: default;
+          }
+
+  </style>
+<body onresize="resizeEvent(); initializeAll()">
+	<div id="includeHeader"></div>
+
+	 <div id="wrapper" class="text fotopanel">
+		  <div id="wrapper-top"> </div>
+		  <div id="left">
+			<ul class="menu">
+			  <li> <a class="opened active" onclick='showContext("otvorenie_skoly");'>Slávnosť otvorenia 
+				  <img id="nm1" src="/images/minus.png" height="20px" width="20px"></a>
+
+				<ul class="sub-menu ">
+				  <li><a onclick='showContext("priestory_skoly");'>Priestory školy</a></li>
+				  <li><a onclick='showContext("otvorenie_skoly");'>Otvorenie</a></li>
+				</ul>
+			  </li>
+
+			</ul>
+		  </div>
+	</div>
+	<div id="sidebar_from_w3">
+        <span class="w3-opennav w3-xlarge" onclick="openLeftMenu()"><img src="/images/left-alignment.png" height="20px" width="20px"></span>
+		<nav class="w3-sidenav w3-white w3-card-2 w3-animate-left" style="display:none; height: 400px; top: 150px;" id="leftMenu">
+		  <a href="javascript:void(0)" onclick="closeLeftMenu()"
+		  class="w3-closenav w3-large">Zavrieť &times;</a>
+            <hr>
+            <a class="opened active" onclick='showContext("otvorenie_skoly");'>Slávnosť otvorenia <a>
+                <a onclick='showContext("priestory_skoly");'>&nbsp;Priestory školy</a>
+                <a onclick='showContext("otvorenie_skoly");'>&nbsp;Otvorenie</a>
+		</nav>
+	</div>
+
+
+    <div id="galery_picker"></div>
+
+    <div class="navigation">
+        <center>
+            <a id="prev" href="#" onclick='prev();'> 
+                <img id="left_button" src="/images/previous.png" height="30px" width="30px"></a> 
+            <a id="next" href="#" onclick='next();' >
+                <img id="right_button" src="/images/next.png" height="30px" width="30px">
+            </a>
+        </center> 
+    </div>
+    <br>
+    <br>
+     
+
+	<div id="includeFooter"></div>	
+        <script src="scripts/jquery.bsPhotoGallery.js"></script>
+</body>
+</html>
+<script> 
+    
+    var index = 0;
+	$(window).on('load', function() {
+		resizeEvent(); 
+	});
+	
+	function openLeftMenu() 
+	{
+		document.getElementById("leftMenu").style.display = "block";
+	};
+	
+	function closeLeftMenu() 
+	{
+		document.getElementById("leftMenu").style.display = "none";
+	};
+	  
+    function initializeAll()
+    {
+        $('#prev').addClass('disable');
+        $('#next').addClass('disable');
+        $('#right_button')[0].src='/images/next_disable.png';
+        $('#left_button')[0].src='/images/previous_disable.png';
+        index = 0;
+        var images = $('.bspHasModal');
+        if($(document).width() > 1200 )
+        {
+            if(images.length > 16 )
+            {
+                $('#next').removeClass('disable');
+                $('#right_button')[0].src='/images/next.png';
+                for(var i=0; i < 16; i++)
+                    images[i].classList.remove('hide_image');
+                for(var i=16; i < images.length; i++)
+                    images[i].classList.add('hide_image');
+            }
+            return;
+        }
+        else if($(document).width() > 768 )
+        {
+            if(images.length > 15 )
+            {
+                $('#next').removeClass('disable');
+                $('#right_button')[0].src='/images/next.png';
+                for(var i=0; i < 15; i++)
+                    images[i].classList.remove('hide_image');
+                for(var i=15; i < images.length; i++)
+                    images[i].classList.add('hide_image');
+            }            
+            return;
+        } 
+        else
+        {
+            if(images.length > 12 )
+            {
+                $('#next').removeClass('disable');
+                $('#right_button')[0].src='/images/next.png';
+                for(var i=0; i < 12; i++)
+                    images[i].classList.remove('hide_image');
+                for(var i=12; i < images.length; i++)
+                    images[i].classList.add('hide_image');
+            }            
+            return;
+        }             
+    };
+    
+    function next()
+    {
+		for(var i = 0; i< ((index+1)*4); i++)
+            if($('.visible-lg-block')[i])
+			 $('.visible-lg-block')[i].style.cssText = "margin-bottom: 0px;";
+			
+        $('#prev').removeClass('disable');
+        $('#left_button')[0].src='/images/previous.png';
+        var images = $('.bspHasModal');
+        if($(document).width() > 1200 )
+        {
+            if(images.length < index*16+32 )
+            {
+                $('#next').addClass('disable');
+                $('#right_button')[0].src='/images/next_disable.png';
+            }
+            
+            images.addClass('hide_image');
+            for(var i=(index*16)+16; i< images.length && i < (index*16)+32; i++)
+                images[i].classList.remove('hide_image');
+            index++;
+            return;
+        }
+        else if($(document).width() > 768 )
+        {
+            if(images.length > index*15+15 )
+            {
+                $('#right_button')[0].src='/images/next_disable.png';    
+                $('#next').addClass('disable');
+            }
+            
+            images.addClass('hide_image');
+            for(var i=(index*15)+15; i< images.length && i < (index*15)+30; i++)
+                images[i].classList.remove('hide_image');
+        } 
+        else
+        {
+            if(images.length > index*12+12 )
+            {
+                $('#right_button')[0].src='/images/next_disable.png';    
+                $('#next').addClass('disable');
+            }
+            
+            images.addClass('hide_image');
+            for(var i=(index*12)+12; i< images.length && i < (index*12)+30; i++)
+                images[i].classList.remove('hide_image');
+        }        
+        index++;
+    };
+
+    function prev()
+    {
+		for(var i = 0; i< index -1; i++)
+            if($('.visible-lg-block')[i])
+			     $('.visible-lg-block')[i].style.display = "block";
+				
+        $('#next').removeClass('disable');
+        $('#right_button')[0].src='/images/next.png';
+        if(index == 1 )
+        {
+             $('#left_button')[0].src='/images/previous_disable.png';
+             $('#prev').addClass('disable');
+        }
+        
+        var images = $('.bspHasModal');
+        if($(document).width() > 1200 )
+        {
+            images.addClass('hide_image');
+            for(var i=(index*16)-16; i< images.length && i < (index*16); i++)
+                images[i].classList.remove('hide_image');
+            index--;  
+            return;
+        }
+        else if($(document).width() > 768 )
+        {
+            images.addClass('hide_image');
+            for(var i=(index*15)-15; i< images.length && i < (index*15); i++)
+                images[i].classList.remove('hide_image');
+        }   
+        else
+        {
+            images.addClass('hide_image');
+            for(var i=(index*12)-12; i< images.length && i < (index*12); i++)
+                images[i].classList.remove('hide_image');
+        }              
+        index--;        
+    };   
+    
+    
+    $(document).ready(function(){
+
+
+        $('#left .menu li a').click(function(){
+            if ( $(this).hasClass('closed') ) {
+                $(this).children()[0].src="/images/minus.png";
+                $(this).toggleClass('opened closed');
+                $(this).parent().siblings().find('.sub-menu').slideUp();
+                $(this).parent().siblings().find('a.opened').toggleClass('opened closed');
+                $(this).next().slideDown();
+                return false;	
+            } else if ( $(this).hasClass('opened') ){
+                $(this).children()[0].src="/images/plus.png";
+                $(this).toggleClass('opened closed');
+                $(this).next().slideUp();
+                return false;
+            }
+        });
+        
+            
+            document.getElementById("galery_picker").innerHTML = 
+            '    <div class="container" style="padding-left: 0px; ' + 'height: calc(100vh - 240px); margin-top: 150px"> ' +
+            '<ul class="row first galery_style"> ' +
+             '   <li> ' +
+              '      <img alt="Vstupné schody do škôlky"  src="obrazky/galeria/otvorenie/priestory/IMG_1_mini.jpg"> ' +
+               ' </li> ' +
+            '    <li> ' +
+            '        <img alt="Kuchynské priestory"  src="obrazky/galeria/otvorenie/priestory/IMG_2_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Kuchynsé priestory pohľad zhodra"  src="obrazky/galeria/otvorenie/priestory/IMG_3_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Vydávanie jedál"  src="obrazky/galeria/otvorenie/priestory/IMG_4_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Technology soup"  src="obrazky/galeria/otvorenie/priestory/IMG_5_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Legal docs"  src="obrazky/galeria/otvorenie/priestory/IMG_6_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Nature shot"  src="obrazky/galeria/otvorenie/priestory/IMG_7_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Kid with camera" src="obrazky/galeria/otvorenie/priestory/IMG_8_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Relax and Chill" src="obrazky/galeria/otvorenie/priestory/IMG_9_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Cool colors" src="obrazky/galeria/otvorenie/priestory/IMG_10_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Jump over"  src="obrazky/galeria/otvorenie/priestory/IMG_11_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Culture business" src="obrazky/galeria/otvorenie/priestory/IMG_12_mini.jpg"> ' +
+            '    </li> ' +
+            '    <li> ' +
+            '        <img alt="Culture business" src="obrazky/galeria/otvorenie/priestory/IMG_13_mini.jpg" onload="initializeAll()"> ' +
+            '    </li> ' +	                
+            '</ul> ' +
+            '</div>';
+         initializeAll();
+        $('ul.first').bsPhotoGallery({
+          "classes" : "col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xxs-12",
+          "hasModal" : true,
+          "fullHeight" : true
+        });
+
+        
+     });
+    
+    function showContext(menuItemSelected)
+    {
+        switch(menuItemSelected)
+        {
+            case "priestory_skoly":			
+                document.getElementById("galery_picker").innerHTML = 
+                '    <div class="container" style="padding-left: 0px; ' + 'height: calc(100vh - 240px); margin-top: 150px"> ' +
+                '<ul class="row first galery_style"> ' +
+                 '   <li> ' +
+                  '      <img alt="Vstupné schody do škôlky"  src="obrazky/galeria/otvorenie/priestory/IMG_1_mini.jpg"> ' +
+                   ' </li> ' +
+                '    <li> ' +
+                '        <img alt="Kuchynské priestory"  src="obrazky/galeria/otvorenie/priestory/IMG_2_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Kuchynsé priestory pohľad zhodra"  src="obrazky/galeria/otvorenie/priestory/IMG_3_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Vydávanie jedál"  src="obrazky/galeria/otvorenie/priestory/IMG_4_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Technology soup"  src="obrazky/galeria/otvorenie/priestory/IMG_5_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Legal docs"  src="obrazky/galeria/otvorenie/priestory/IMG_6_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Nature shot"  src="obrazky/galeria/otvorenie/priestory/IMG_7_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Kid with camera" src="obrazky/galeria/otvorenie/priestory/IMG_8_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Relax and Chill" src="obrazky/galeria/otvorenie/priestory/IMG_9_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Cool colors" src="obrazky/galeria/otvorenie/priestory/IMG_10_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Jump over"  src="obrazky/galeria/otvorenie/priestory/IMG_11_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/priestory/IMG_12_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/priestory/IMG_13_mini.jpg" onload="initializeAll()"> ' +
+                '    </li> ' +					
+                '</ul> ' +
+                '</div>';
+                $('ul.first').bsPhotoGallery({
+                  "classes" : "col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xxs-12",
+                  "hasModal" : true,
+                  "fullHeight" : true
+                });
+                break;
+            case "otvorenie_skoly":
+                document.getElementById("galery_picker").innerHTML = 
+                '    <div class="container" style="padding-left: 0px; ' + 'height: calc(100vh - 240px); margin-top: 150px"> ' +
+                '<ul class="row first galery_style"> ' +
+                 '   <li> ' +
+                  '      <img alt="Vstupné schody do škôlky"  src="obrazky/galeria/otvorenie/otvorenie/IMG_14_mini.jpg"> ' +
+                   ' </li> ' +
+                '    <li> ' +
+                '        <img alt="Kuchynské priestory"  src="obrazky/galeria/otvorenie/otvorenie/IMG_15_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Kuchynsé priestory pohľad zhodra"  src="obrazky/galeria/otvorenie/otvorenie/IMG_16_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Vydávanie jedál"  src="obrazky/galeria/otvorenie/otvorenie/IMG_17_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Technology soup"  src="obrazky/galeria/otvorenie/otvorenie/IMG_18_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Legal docs"  src="obrazky/galeria/otvorenie/otvorenie/IMG_19_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Nature shot"  src="obrazky/galeria/otvorenie/otvorenie/IMG_20_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Kid with camera" src="obrazky/galeria/otvorenie/otvorenie/IMG_21_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Relax and Chill" src="obrazky/galeria/otvorenie/otvorenie/IMG_22_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Cool colors" src="obrazky/galeria/otvorenie/otvorenie/IMG_23_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Jump over"  src="obrazky/galeria/otvorenie/otvorenie/IMG_24_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_25_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Vydávanie jedál"  src="obrazky/galeria/otvorenie/otvorenie/IMG_26_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Technology soup"  src="obrazky/galeria/otvorenie/otvorenie/IMG_27_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Legal docs"  src="obrazky/galeria/otvorenie/otvorenie/IMG_28_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Nature shot"  src="obrazky/galeria/otvorenie/otvorenie/IMG_29_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Kid with camera" src="obrazky/galeria/otvorenie/otvorenie/IMG_30_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Relax and Chill" src="obrazky/galeria/otvorenie/otvorenie/IMG_31_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Cool colors" src="obrazky/galeria/otvorenie/otvorenie/IMG_32_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Jump over"  src="obrazky/galeria/otvorenie/otvorenie/IMG_33_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_34_mini.jpg"> ' +
+                '    </li> ' +		
+                '    <li> ' +
+                '        <img alt="Nature shot"  src="obrazky/galeria/otvorenie/otvorenie/IMG_35_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Kid with camera" src="obrazky/galeria/otvorenie/otvorenie/IMG_36_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Relax and Chill" src="obrazky/galeria/otvorenie/otvorenie/IMG_37_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Cool colors" src="obrazky/galeria/otvorenie/otvorenie/IMG_38_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Jump over"  src="obrazky/galeria/otvorenie/otvorenie/IMG_39_mini.jpg"> ' +
+                '    </li> ' +
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_40_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_41_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_42_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_43_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_44_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_45_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_46_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_48_mini.jpg"> ' +
+                '    </li> ' +	
+                '    <li> ' +
+                '        <img alt="Culture business" src="obrazky/galeria/otvorenie/otvorenie/IMG_49_mini.jpg" onload="initializeAll()"> ' +
+                '    </li> ' +	
+                '</ul> ' +
+                '</div>';
+                $('ul.first').bsPhotoGallery({
+                  "classes" : "col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xxs-12",
+                  "hasModal" : true,
+                  "fullHeight" : true
+                });					
+                break;				
+            break;            
+        }// end of switch
+        initializeAll();
+            //alert(menuIthemSelected);
+    };    
+</script>

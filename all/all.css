@@ -1,0 +1,51 @@
+
+/*-------------------*/
+/*     WRAPPER       */
+/*-------------------*/
+#wrapper-top {
+	height:18px;
+	width:200px;
+}
+
+/*-------------------*/
+/*     LEFT MENU     */
+/*-------------------*/
+
+/* Main Menu */
+#left {
+	width: 190px;;
+	float: left;
+	min-height: 615px;
+	
+}
+#left .logo a {
+	background:url("../images/sprite.png") no-repeat scroll 0 0 transparent;
+	display:block;
+	height:32px;
+	margin:8px auto 0;
+	text-indent:-999999px;
+	width:190px;
+}
+#left .menu {
+	width: 100%;
+	border-top: 1px solid #eaeaea;
+	margin-top: 30px;
+}
+#left .menu li a {
+	display: block;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 22px;
+	border-bottom: 1px solid #eaeaea;
+}
+#left .menu li a.active {
+	color: black;
+	border-right: 1px solid #fff;
+}
+
+#left .menu li .sub-menu li a {
+	padding-left: 38px;
+}
+#left .menu .sub-menu.closed {
+	display: none;
+}
